@@ -11,3 +11,6 @@ OBJ/main.crf
 OBJ/main.o
 OBJ/misc.o
 OBJ/Project.axf
+OBJ/timer.o
+OBJ/system_stm32f10x.o
+OBJ/stm32f10x_cec.o
