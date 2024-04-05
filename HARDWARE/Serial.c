@@ -10,7 +10,7 @@ uint8_t Serial_RxFlag;		//定义串口接收的标志位变量
   * 参    数：无
   * 返 回 值：无
   */
-void Serial_Init(void)
+void USART1_Init(void)
 {
      GPIO_InitTypeDef GPIO_InitStructure;
      USART_InitTypeDef USART_InitStructure;				//定义结构体变量

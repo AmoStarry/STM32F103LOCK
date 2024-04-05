@@ -11,7 +11,7 @@ int main(void)
      Timer_Init(10000,7200);   
      LED_Init();
      
-     Serial_Init();
+     USART1_Init();
      esp8266_init();
 	while(1)
 	{
