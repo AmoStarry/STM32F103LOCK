@@ -3,3 +3,11 @@
 *.o
 *.o
 /OBJ
+OBJ/stm32f10x_rtc.o
+OBJ/core_cm3.o
+OBJ/core_cm3.o
+/OBJ
+OBJ/main.crf
+OBJ/main.o
+OBJ/misc.o
+OBJ/Project.axf

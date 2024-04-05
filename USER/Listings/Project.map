@@ -13,7 +13,7 @@ Section Cross References
     main.o(i.main) refers to misc.o(i.NVIC_PriorityGroupConfig) for NVIC_PriorityGroupConfig
     main.o(i.main) refers to timer.o(i.Timer_Init) for Timer_Init
     main.o(i.main) refers to led.o(i.LED_Init) for LED_Init
-    main.o(i.main) refers to serial.o(i.Serial_Init) for Serial_Init
+    main.o(i.main) refers to serial.o(i.USART1_Init) for USART1_Init
     main.o(i.main) refers to esp8266.o(i.esp8266_init) for esp8266_init
     main.o(i.main) refers to printfa.o(i.__0printf) for __2printf
     main.o(i.main) refers to delay.o(i.Delay_ms) for Delay_ms
@@ -34,13 +34,6 @@ Section Cross References
     led.o(i.LED_Init) refers to stm32f10x_gpio.o(i.GPIO_ResetBits) for GPIO_ResetBits
     serial.o(i.Serial_GetRxData) refers to serial.o(.data) for Serial_RxData
     serial.o(i.Serial_GetRxFlag) refers to serial.o(.data) for Serial_RxFlag
-    serial.o(i.Serial_Init) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
-    serial.o(i.Serial_Init) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
-    serial.o(i.Serial_Init) refers to stm32f10x_usart.o(i.USART_Init) for USART_Init
-    serial.o(i.Serial_Init) refers to stm32f10x_usart.o(i.USART_ITConfig) for USART_ITConfig
-    serial.o(i.Serial_Init) refers to misc.o(i.NVIC_PriorityGroupConfig) for NVIC_PriorityGroupConfig
-    serial.o(i.Serial_Init) refers to misc.o(i.NVIC_Init) for NVIC_Init
-    serial.o(i.Serial_Init) refers to stm32f10x_usart.o(i.USART_Cmd) for USART_Cmd
     serial.o(i.Serial_Printf) refers to printfa.o(i.__0vsprintf) for vsprintf
     serial.o(i.Serial_Printf) refers to serial.o(i.Serial_SendString) for Serial_SendString
     serial.o(i.Serial_SendArray) refers to serial.o(i.Serial_SendByte) for Serial_SendByte
@@ -53,6 +46,13 @@ Section Cross References
     serial.o(i.USART1_IRQHandler) refers to stm32f10x_usart.o(i.USART_ReceiveData) for USART_ReceiveData
     serial.o(i.USART1_IRQHandler) refers to stm32f10x_usart.o(i.USART_ClearITPendingBit) for USART_ClearITPendingBit
     serial.o(i.USART1_IRQHandler) refers to serial.o(.data) for Serial_RxData
+    serial.o(i.USART1_Init) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
+    serial.o(i.USART1_Init) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
+    serial.o(i.USART1_Init) refers to stm32f10x_usart.o(i.USART_Init) for USART_Init
+    serial.o(i.USART1_Init) refers to stm32f10x_usart.o(i.USART_ITConfig) for USART_ITConfig
+    serial.o(i.USART1_Init) refers to misc.o(i.NVIC_PriorityGroupConfig) for NVIC_PriorityGroupConfig
+    serial.o(i.USART1_Init) refers to misc.o(i.NVIC_Init) for NVIC_Init
+    serial.o(i.USART1_Init) refers to stm32f10x_usart.o(i.USART_Cmd) for USART_Cmd
     serial.o(i.fputc) refers to serial.o(i.Serial_SendByte) for Serial_SendByte
     esp8266.o(i.esp8266_init) refers to printfa.o(i.__0printf) for __2printf
     esp8266.o(i.esp8266_init) refers to delay.o(i.Delay_ms) for Delay_ms
@@ -998,22 +998,22 @@ Image Symbol Table
     i.RCC_APB2PeriphClockCmd                 0x080008cc   Section        0  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
     i.RCC_GetClocksFreq                      0x080008ec   Section        0  stm32f10x_rcc.o(i.RCC_GetClocksFreq)
     i.SVC_Handler                            0x080009c0   Section        0  stm32f10x_it.o(i.SVC_Handler)
-    i.Serial_Init                            0x080009c4   Section        0  serial.o(i.Serial_Init)
-    i.Serial_SendByte                        0x08000a7c   Section        0  serial.o(i.Serial_SendByte)
-    i.SetSysClock                            0x08000a9c   Section        0  system_stm32f10x.o(i.SetSysClock)
-    SetSysClock                              0x08000a9d   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
-    i.SetSysClockTo72                        0x08000aa4   Section        0  system_stm32f10x.o(i.SetSysClockTo72)
-    SetSysClockTo72                          0x08000aa5   Thumb Code   214  system_stm32f10x.o(i.SetSysClockTo72)
-    i.SysTick_Handler                        0x08000b84   Section        0  stm32f10x_it.o(i.SysTick_Handler)
-    i.SystemInit                             0x08000b88   Section        0  system_stm32f10x.o(i.SystemInit)
-    i.TIM1_UP_IRQHandler                     0x08000be8   Section        0  main.o(i.TIM1_UP_IRQHandler)
-    i.TIM_ClearITPendingBit                  0x08000c08   Section        0  stm32f10x_tim.o(i.TIM_ClearITPendingBit)
-    i.TIM_Cmd                                0x08000c0e   Section        0  stm32f10x_tim.o(i.TIM_Cmd)
-    i.TIM_GetITStatus                        0x08000c26   Section        0  stm32f10x_tim.o(i.TIM_GetITStatus)
-    i.TIM_ITConfig                           0x08000c48   Section        0  stm32f10x_tim.o(i.TIM_ITConfig)
-    i.TIM_TimeBaseInit                       0x08000c5c   Section        0  stm32f10x_tim.o(i.TIM_TimeBaseInit)
-    i.Timer_Init                             0x08000d00   Section        0  timer.o(i.Timer_Init)
-    i.USART1_IRQHandler                      0x08000d6c   Section        0  serial.o(i.USART1_IRQHandler)
+    i.Serial_SendByte                        0x080009c4   Section        0  serial.o(i.Serial_SendByte)
+    i.SetSysClock                            0x080009e4   Section        0  system_stm32f10x.o(i.SetSysClock)
+    SetSysClock                              0x080009e5   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
+    i.SetSysClockTo72                        0x080009ec   Section        0  system_stm32f10x.o(i.SetSysClockTo72)
+    SetSysClockTo72                          0x080009ed   Thumb Code   214  system_stm32f10x.o(i.SetSysClockTo72)
+    i.SysTick_Handler                        0x08000acc   Section        0  stm32f10x_it.o(i.SysTick_Handler)
+    i.SystemInit                             0x08000ad0   Section        0  system_stm32f10x.o(i.SystemInit)
+    i.TIM1_UP_IRQHandler                     0x08000b30   Section        0  main.o(i.TIM1_UP_IRQHandler)
+    i.TIM_ClearITPendingBit                  0x08000b50   Section        0  stm32f10x_tim.o(i.TIM_ClearITPendingBit)
+    i.TIM_Cmd                                0x08000b56   Section        0  stm32f10x_tim.o(i.TIM_Cmd)
+    i.TIM_GetITStatus                        0x08000b6e   Section        0  stm32f10x_tim.o(i.TIM_GetITStatus)
+    i.TIM_ITConfig                           0x08000b90   Section        0  stm32f10x_tim.o(i.TIM_ITConfig)
+    i.TIM_TimeBaseInit                       0x08000ba4   Section        0  stm32f10x_tim.o(i.TIM_TimeBaseInit)
+    i.Timer_Init                             0x08000c48   Section        0  timer.o(i.Timer_Init)
+    i.USART1_IRQHandler                      0x08000cb4   Section        0  serial.o(i.USART1_IRQHandler)
+    i.USART1_Init                            0x08000cec   Section        0  serial.o(i.USART1_Init)
     i.USART_ClearITPendingBit                0x08000da4   Section        0  stm32f10x_usart.o(i.USART_ClearITPendingBit)
     i.USART_Cmd                              0x08000dc2   Section        0  stm32f10x_usart.o(i.USART_Cmd)
     i.USART_GetFlagStatus                    0x08000dda   Section        0  stm32f10x_usart.o(i.USART_GetFlagStatus)
@@ -1154,18 +1154,18 @@ Image Symbol Table
     RCC_APB2PeriphClockCmd                   0x080008cd   Thumb Code    26  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
     RCC_GetClocksFreq                        0x080008ed   Thumb Code   192  stm32f10x_rcc.o(i.RCC_GetClocksFreq)
     SVC_Handler                              0x080009c1   Thumb Code     2  stm32f10x_it.o(i.SVC_Handler)
-    Serial_Init                              0x080009c5   Thumb Code   174  serial.o(i.Serial_Init)
-    Serial_SendByte                          0x08000a7d   Thumb Code    28  serial.o(i.Serial_SendByte)
-    SysTick_Handler                          0x08000b85   Thumb Code     2  stm32f10x_it.o(i.SysTick_Handler)
-    SystemInit                               0x08000b89   Thumb Code    78  system_stm32f10x.o(i.SystemInit)
-    TIM1_UP_IRQHandler                       0x08000be9   Thumb Code    28  main.o(i.TIM1_UP_IRQHandler)
-    TIM_ClearITPendingBit                    0x08000c09   Thumb Code     6  stm32f10x_tim.o(i.TIM_ClearITPendingBit)
-    TIM_Cmd                                  0x08000c0f   Thumb Code    24  stm32f10x_tim.o(i.TIM_Cmd)
-    TIM_GetITStatus                          0x08000c27   Thumb Code    34  stm32f10x_tim.o(i.TIM_GetITStatus)
-    TIM_ITConfig                             0x08000c49   Thumb Code    18  stm32f10x_tim.o(i.TIM_ITConfig)
-    TIM_TimeBaseInit                         0x08000c5d   Thumb Code   122  stm32f10x_tim.o(i.TIM_TimeBaseInit)
-    Timer_Init                               0x08000d01   Thumb Code   102  timer.o(i.Timer_Init)
-    USART1_IRQHandler                        0x08000d6d   Thumb Code    44  serial.o(i.USART1_IRQHandler)
+    Serial_SendByte                          0x080009c5   Thumb Code    28  serial.o(i.Serial_SendByte)
+    SysTick_Handler                          0x08000acd   Thumb Code     2  stm32f10x_it.o(i.SysTick_Handler)
+    SystemInit                               0x08000ad1   Thumb Code    78  system_stm32f10x.o(i.SystemInit)
+    TIM1_UP_IRQHandler                       0x08000b31   Thumb Code    28  main.o(i.TIM1_UP_IRQHandler)
+    TIM_ClearITPendingBit                    0x08000b51   Thumb Code     6  stm32f10x_tim.o(i.TIM_ClearITPendingBit)
+    TIM_Cmd                                  0x08000b57   Thumb Code    24  stm32f10x_tim.o(i.TIM_Cmd)
+    TIM_GetITStatus                          0x08000b6f   Thumb Code    34  stm32f10x_tim.o(i.TIM_GetITStatus)
+    TIM_ITConfig                             0x08000b91   Thumb Code    18  stm32f10x_tim.o(i.TIM_ITConfig)
+    TIM_TimeBaseInit                         0x08000ba5   Thumb Code   122  stm32f10x_tim.o(i.TIM_TimeBaseInit)
+    Timer_Init                               0x08000c49   Thumb Code   102  timer.o(i.Timer_Init)
+    USART1_IRQHandler                        0x08000cb5   Thumb Code    44  serial.o(i.USART1_IRQHandler)
+    USART1_Init                              0x08000ced   Thumb Code   174  serial.o(i.USART1_Init)
     USART_ClearITPendingBit                  0x08000da5   Thumb Code    30  stm32f10x_usart.o(i.USART_ClearITPendingBit)
     USART_Cmd                                0x08000dc3   Thumb Code    24  stm32f10x_usart.o(i.USART_Cmd)
     USART_GetFlagStatus                      0x08000ddb   Thumb Code    26  stm32f10x_usart.o(i.USART_GetFlagStatus)
@@ -1255,22 +1255,22 @@ Memory Map of the image
     0x080008ec   0x080008ec   0x000000d4   Code   RO         1976    i.RCC_GetClocksFreq  stm32f10x_rcc.o
     0x080009c0   0x080009c0   0x00000002   Code   RO            7    i.SVC_Handler       stm32f10x_it.o
     0x080009c2   0x080009c2   0x00000002   PAD
-    0x080009c4   0x080009c4   0x000000b8   Code   RO          288    i.Serial_Init       serial.o
-    0x08000a7c   0x08000a7c   0x00000020   Code   RO          292    i.Serial_SendByte   serial.o
-    0x08000a9c   0x08000a9c   0x00000008   Code   RO          152    i.SetSysClock       system_stm32f10x.o
-    0x08000aa4   0x08000aa4   0x000000e0   Code   RO          153    i.SetSysClockTo72   system_stm32f10x.o
-    0x08000b84   0x08000b84   0x00000002   Code   RO            8    i.SysTick_Handler   stm32f10x_it.o
-    0x08000b86   0x08000b86   0x00000002   PAD
-    0x08000b88   0x08000b88   0x00000060   Code   RO          155    i.SystemInit        system_stm32f10x.o
-    0x08000be8   0x08000be8   0x00000020   Code   RO          186    i.TIM1_UP_IRQHandler  main.o
-    0x08000c08   0x08000c08   0x00000006   Code   RO         2595    i.TIM_ClearITPendingBit  stm32f10x_tim.o
-    0x08000c0e   0x08000c0e   0x00000018   Code   RO         2600    i.TIM_Cmd           stm32f10x_tim.o
-    0x08000c26   0x08000c26   0x00000022   Code   RO         2621    i.TIM_GetITStatus   stm32f10x_tim.o
-    0x08000c48   0x08000c48   0x00000012   Code   RO         2625    i.TIM_ITConfig      stm32f10x_tim.o
-    0x08000c5a   0x08000c5a   0x00000002   PAD
-    0x08000c5c   0x08000c5c   0x000000a4   Code   RO         2671    i.TIM_TimeBaseInit  stm32f10x_tim.o
-    0x08000d00   0x08000d00   0x0000006c   Code   RO          224    i.Timer_Init        timer.o
-    0x08000d6c   0x08000d6c   0x00000038   Code   RO          295    i.USART1_IRQHandler  serial.o
+    0x080009c4   0x080009c4   0x00000020   Code   RO          291    i.Serial_SendByte   serial.o
+    0x080009e4   0x080009e4   0x00000008   Code   RO          152    i.SetSysClock       system_stm32f10x.o
+    0x080009ec   0x080009ec   0x000000e0   Code   RO          153    i.SetSysClockTo72   system_stm32f10x.o
+    0x08000acc   0x08000acc   0x00000002   Code   RO            8    i.SysTick_Handler   stm32f10x_it.o
+    0x08000ace   0x08000ace   0x00000002   PAD
+    0x08000ad0   0x08000ad0   0x00000060   Code   RO          155    i.SystemInit        system_stm32f10x.o
+    0x08000b30   0x08000b30   0x00000020   Code   RO          186    i.TIM1_UP_IRQHandler  main.o
+    0x08000b50   0x08000b50   0x00000006   Code   RO         2595    i.TIM_ClearITPendingBit  stm32f10x_tim.o
+    0x08000b56   0x08000b56   0x00000018   Code   RO         2600    i.TIM_Cmd           stm32f10x_tim.o
+    0x08000b6e   0x08000b6e   0x00000022   Code   RO         2621    i.TIM_GetITStatus   stm32f10x_tim.o
+    0x08000b90   0x08000b90   0x00000012   Code   RO         2625    i.TIM_ITConfig      stm32f10x_tim.o
+    0x08000ba2   0x08000ba2   0x00000002   PAD
+    0x08000ba4   0x08000ba4   0x000000a4   Code   RO         2671    i.TIM_TimeBaseInit  stm32f10x_tim.o
+    0x08000c48   0x08000c48   0x0000006c   Code   RO          224    i.Timer_Init        timer.o
+    0x08000cb4   0x08000cb4   0x00000038   Code   RO          294    i.USART1_IRQHandler  serial.o
+    0x08000cec   0x08000cec   0x000000b8   Code   RO          295    i.USART1_Init       serial.o
     0x08000da4   0x08000da4   0x0000001e   Code   RO         3133    i.USART_ClearITPendingBit  stm32f10x_usart.o
     0x08000dc2   0x08000dc2   0x00000018   Code   RO         3136    i.USART_Cmd         stm32f10x_usart.o
     0x08000dda   0x08000dda   0x0000001a   Code   RO         3139    i.USART_GetFlagStatus  stm32f10x_usart.o
