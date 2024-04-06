@@ -34,3 +34,4 @@
 ..\obj\main.o: ..\HARDWARE\Serial.h
 ..\obj\main.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\main.o: ..\SYSTEM\Delay.h
+..\obj\main.o: ..\HARDWARE\OLED.h

@@ -2,8 +2,12 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+extern unsigned char receive_buf[512];
+extern uint8_t receive_start;		 //定义串口接收的标志位变量
+extern uint16_t receive_count;	      //接收数据计数器
+
 uint8_t Serial_RxData;		//定义串口接收的数据变量
-uint8_t Serial_RxFlag;		//定义串口接收的标志位变量
+uint8_t Serial_RxFlag;        //定义串口接收的标志位变量
 
 /**
   * 函    数：串口初始化
@@ -195,7 +199,10 @@ void USART1_IRQHandler(void)
 	if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET)		//判断是否是USART1的接收事件触发的中断
 	{
 		Serial_RxData = USART_ReceiveData(USART1);				//读取数据寄存器，存放在接收的数据变量
-		Serial_RxFlag = 1;										//置接收标志位变量为1
+/*>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/          
+          receive_buf[receive_count++] =Serial_RxData;
+		receive_start = 1;										//置接收标志位变量为1
+/*>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/  
 		USART_ClearITPendingBit(USART1, USART_IT_RXNE);			//清除USART1的RXNE标志位
 																//读取数据寄存器会自动清除此标志位
 																//如果已经读取了数据寄存器，也可以不执行此代码

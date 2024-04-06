@@ -1,6 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <esp8266.h>
 #include <Serial.h>
 #include <Delay.h>
+#include <OLED.h>
+
+unsigned char receive_buf[512];	  //串口接收缓存数组
+uint16_t receive_start =0;               //定义串口接收的标志位变量
+uint16_t receive_count =0;
 
 #define WIFI_SSID        "11"
 #define WIFI_PASSWD      "11111111"
@@ -24,6 +32,7 @@ char AT_MQTTSUB[] =     {"AT+MQTTSUB=0,\""SUB_TOPIC"\",1\r\n"};
 
 void esp8266_init(void)
 {
+//       uint16_t count = 0;
 //     printf("AT\r\n");
 //     Delay_ms(1000);
 //     printf("AT+RESTORE\r\n");
@@ -44,20 +53,71 @@ void esp8266_init(void)
 //     Delay_ms(5000);
 //     printf("AT+MQTTPUB=0,\"/sys/k0ygtxfPbcQ/esp8266/thing/event/property/post\",\"{\\\"params\\\":{\\\"temp\\\":88\\,\\\"humi\\\":66\\,\\\"led\\\":1}\\,\\\"version\\\":\\\"1.0.0\\\"}\",1,0\r\n");
 //     Delay_ms(5000);
-     
+
      Serial_SendString(AT_RESTORE);
-     Delay_ms(1000);
+     Timerout_exit(5000,1);
      Serial_SendString(AT_CWMODE);
-     Delay_ms(1000);
+     Timerout_exit(5000,2);
      Serial_SendString(AT_CIPSNTPCFG);
-     Delay_ms(1000);
+     Timerout_exit(5000,3);
      Serial_SendString(AT_CWJAP);
-     Delay_ms(5000);
+     Timerout_exit(10000,4);
      Serial_SendString(AT_MQTTUSERCFG);
-     Delay_ms(1000);
+     Timerout_exit(10000,5);
      Serial_SendString(AT_MQTTCLIENTID);
-     Delay_ms(5000);
+     Timerout_exit(5000,6);
      Serial_SendString(AT_MQTTCONN);
-     Delay_ms(5000);
+     Timerout_exit(5000,7);
      Serial_SendString(AT_MQTTSUB);
 }
+
+void Timerout_exit(uint16_t time,uint16_t number)
+{
+     uint8_t count =0;
+     while(count<time)
+     {
+          count++;
+          Delay_ms(1);
+          if(strstr((const char*)receive_buf, "OK"))
+          {
+               memset(receive_buf, 0, sizeof(receive_buf));
+               OLED_ShowNum(2,4,number,1);
+               receive_count =0;
+               receive_start =0;
+               break;
+          }
+     }
+     if (count >= time)
+     {
+          OLED_ShowString(2, 2, "Timeout ERROR"); // 超时显示错误信息
+     }
+}
+
+
+
+
+//void Timerout_exit(uint16_t time,uint16_t number)
+//{
+//     uint16_t count =0;
+//     while(1)
+//     {
+////          if(receive_start == 0)
+////          {
+////              count++;
+////              Delay_ms(1); 
+////              if(count >= time) 
+////              {
+////                  OLED_ShowString(4, 2, "Timeout ERROR");
+////              }
+////          }
+//          if(strstr((const char*)receive_buf, "OK"))
+//          {
+//                   memset(receive_buf, 0x00, sizeof(receive_buf));
+//                   OLED_ShowNum(2,4,number,1);
+//                   receive_count =0;
+//                   receive_start =0;
+//                   break;
+//          }         
+//     }
+
+//}

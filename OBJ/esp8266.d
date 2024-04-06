@@ -1,6 +1,8 @@
 ..\obj\esp8266.o: ..\HARDWARE\esp8266.c
+..\obj\esp8266.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\esp8266.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\esp8266.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\esp8266.o: ..\HARDWARE\esp8266.h
-..\obj\esp8266.o: ..\HARDWARE\Serial.h
 ..\obj\esp8266.o: ..\USER\stm32f10x.h
 ..\obj\esp8266.o: ..\CORE\core_cm3.h
 ..\obj\esp8266.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -30,5 +32,6 @@
 ..\obj\esp8266.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\esp8266.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\esp8266.o: ..\STM32F10x_FWLib\inc\misc.h
-..\obj\esp8266.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\esp8266.o: ..\HARDWARE\Serial.h
 ..\obj\esp8266.o: ..\SYSTEM\Delay.h
+..\obj\esp8266.o: ..\HARDWARE\OLED.h
