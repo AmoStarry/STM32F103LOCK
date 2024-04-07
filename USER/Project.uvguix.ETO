@@ -3642,9 +3642,9 @@
       </Doc>
       <Doc>
         <Name>..\HARDWARE\esp8266.c</Name>
-        <ColumnNumber>23</ColumnNumber>
-        <TopLine>54</TopLine>
-        <CurrentLine>71</CurrentLine>
+        <ColumnNumber>30</ColumnNumber>
+        <TopLine>57</TopLine>
+        <CurrentLine>84</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>

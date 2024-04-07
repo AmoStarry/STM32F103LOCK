@@ -56,19 +56,19 @@ void esp8266_init(void)
 //     Delay_ms(5000);
 
      Serial_SendString(AT_RESTORE);
-     Timerout_exit(2000,1);
+     Timerout_exit(2,1);
      Serial_SendString(AT_CWMODE);
-     Timerout_exit(2000,2);
+     Timerout_exit(2,2);
      Serial_SendString(AT_CIPSNTPCFG);
-     Timerout_exit(2000,3);
+     Timerout_exit(2,3);
      Serial_SendString(AT_CWJAP);
-     Timerout_exit(2000,4);
+     Timerout_exit(2,4);
      Serial_SendString(AT_MQTTUSERCFG);
-     Timerout_exit(6000,5);
+     Timerout_exit(5,5);
      Serial_SendString(AT_MQTTCLIENTID);
-     Timerout_exit(8000,6);
+     Timerout_exit(5,6);
      Serial_SendString(AT_MQTTCONN);
-     Timerout_exit(8000,7);
+     Timerout_exit(5,7);
      Serial_SendString(AT_MQTTSUB);
 }
 
@@ -81,7 +81,7 @@ void Timerout_exit(uint16_t time,uint16_t number)
           if(receive_start == 0)
           {
               count++;
-              Delay_ms(1); 
+              Delay_ms(1000); 
               if(count >= time) 
               {
                   OLED_ShowString(4, 2, "Timeout ERROR");
