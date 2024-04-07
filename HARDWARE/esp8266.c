@@ -7,11 +7,10 @@
 #include <OLED.h>
 
 unsigned char receive_buf[512];	  //串口接收缓存数组
-uint16_t receive_start =0;               //定义串口接收的标志位变量
-uint16_t receive_count =0;
-uint16_t receive_finish = 0;	    //串口2接收结束标志位 
+uint16_t receive_start =0;           //定义串口接收的标志位变量
+uint16_t receive_count =0;           //定义串口接收字节计数
 
-#define WIFI_SSID        "11"
+#define WIFI_SSID        "22"
 #define WIFI_PASSWD      "11111111"
 
 #define MQTT_CLIENT_ID   "k0ygtxfPbcQ.esp8266|securemode=2\\,signmethod=hmacsha256\\,timestamp=1712143269117|"   
@@ -33,7 +32,6 @@ char AT_MQTTSUB[] =     {"AT+MQTTSUB=0,\""SUB_TOPIC"\",1\r\n"};
 
 void esp8266_init(void)
 {
-//       uint16_t count = 0;
 //     printf("AT\r\n");
 //     Delay_ms(1000);
 //     printf("AT+RESTORE\r\n");
@@ -56,24 +54,24 @@ void esp8266_init(void)
 //     Delay_ms(5000);
 
      Serial_SendString(AT_RESTORE);
-     Timerout_exit(2,1);
+     Timerout_exit(2,"1.RESET");
      Serial_SendString(AT_CWMODE);
-     Timerout_exit(2,2);
+     Timerout_exit(2,"2.MODE1");
      Serial_SendString(AT_CIPSNTPCFG);
-     Timerout_exit(2,3);
+     Timerout_exit(2,"3.ALIYUN_INIT");
      Serial_SendString(AT_CWJAP);
-     Timerout_exit(2,4);
+     Timerout_exit(2,"4.WIFI_SUCCESS");
      Serial_SendString(AT_MQTTUSERCFG);
-     Timerout_exit(5,5);
+     Timerout_exit(5,"5.MQTT USER");
      Serial_SendString(AT_MQTTCLIENTID);
-     Timerout_exit(5,6);
+     Timerout_exit(5,"6.MQTT CLIENTID");
      Serial_SendString(AT_MQTTCONN);
-     Timerout_exit(5,7);
+     Timerout_exit(5,"7.MQTT ALIYUN");
      Serial_SendString(AT_MQTTSUB);
+     Timerout_exit(5,"8.SUB TOPIC");
 }
 
-
-void Timerout_exit(uint16_t time,uint16_t number)
+void Timerout_exit(uint16_t time,char *message)
 {
      uint16_t count =0;
      while(1)
@@ -89,7 +87,7 @@ void Timerout_exit(uint16_t time,uint16_t number)
           }
           if(strstr((const char*)receive_buf, "OK"))
           {
-                   OLED_ShowNum(2,4,number,1);
+                   OLED_ShowString(2, 1, message);
                    memset(receive_buf, 0x00, sizeof(receive_buf));
                    receive_count =0;
                    receive_start =0;

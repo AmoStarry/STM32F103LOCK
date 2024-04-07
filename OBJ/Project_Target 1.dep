@@ -93,7 +93,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\HARDWARE\Timer.h)(0x65B60210)
 I (..\HARDWARE\LED\LED.h)(0x65B3C29C)
-I (..\HARDWARE\esp8266.h)(0x6610EA3D)
+I (..\HARDWARE\esp8266.h)(0x66120A58)
 I (..\HARDWARE\Serial.h)(0x660FBF04)
 I (D:\rujian\keil5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (..\SYSTEM\Delay.h)(0x6130920D)
@@ -192,11 +192,11 @@ I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (D:\rujian\keil5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\rujian\keil5\ARM\ARMCC\include\stdarg.h)(0x5E8E3CC2)
 F (..\HARDWARE\Serial.h)(0x660FBF04)()
-F (..\HARDWARE\esp8266.c)(0x6612053B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\USER -I ..\SYSTEM -I ..\HARDWARE -I ..\HARDWARE\LED-ID:\rujian\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="538" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\esp8266.o --omf_browse ..\obj\esp8266.crf --depend ..\obj\esp8266.d)
+F (..\HARDWARE\esp8266.c)(0x6612135D)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\USER -I ..\SYSTEM -I ..\HARDWARE -I ..\HARDWARE\LED-ID:\rujian\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="538" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\esp8266.o --omf_browse ..\obj\esp8266.crf --depend ..\obj\esp8266.d)
 I (D:\rujian\keil5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\rujian\keil5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\rujian\keil5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
-I (..\HARDWARE\esp8266.h)(0x6610EA3D)
+I (..\HARDWARE\esp8266.h)(0x66120A58)
 I (..\USER\stm32f10x.h)(0x5BC97917)
 I (..\CORE\core_cm3.h)(0x4D523B58)
 I (D:\rujian\keil5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
@@ -228,7 +228,7 @@ I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\HARDWARE\Serial.h)(0x660FBF04)
 I (..\SYSTEM\Delay.h)(0x6130920D)
 I (..\HARDWARE\OLED.h)(0x660FEF27)
-F (..\HARDWARE\esp8266.h)(0x6610EA3D)()
+F (..\HARDWARE\esp8266.h)(0x66120A58)()
 F (..\HARDWARE\OLED.c)(0x63087D17)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\USER -I ..\SYSTEM -I ..\HARDWARE -I ..\HARDWARE\LED-ID:\rujian\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="538" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o ..\obj\oled.o --omf_browse ..\obj\oled.crf --depend ..\obj\oled.d)
 I (..\USER\stm32f10x.h)(0x5BC97917)
 I (..\CORE\core_cm3.h)(0x4D523B58)

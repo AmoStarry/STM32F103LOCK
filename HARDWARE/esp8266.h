@@ -3,5 +3,5 @@
 #include "stm32f10x.h"                  // Device header
 
 void esp8266_init(void);
-void Timerout_exit(uint16_t time,uint16_t number);
+void Timerout_exit(uint16_t time,char *message);
 #endif
