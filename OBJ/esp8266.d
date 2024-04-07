@@ -35,3 +35,6 @@
 ..\obj\esp8266.o: ..\HARDWARE\Serial.h
 ..\obj\esp8266.o: ..\SYSTEM\Delay.h
 ..\obj\esp8266.o: ..\HARDWARE\OLED.h
+..\obj\esp8266.o: ..\HARDWARE\core_json.h
+..\obj\esp8266.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdbool.h
+..\obj\esp8266.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stddef.h

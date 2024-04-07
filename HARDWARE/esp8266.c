@@ -5,7 +5,13 @@
 #include <Serial.h>
 #include <Delay.h>
 #include <OLED.h>
+#include "core_json.h"
 
+/*************************************/
+uint8_t led_status =0;
+uint8_t temp_value =60;
+uint8_t humi_value =60;
+/*************************************/
 unsigned char receive_buf[512];	  //串口接收缓存数组
 uint16_t receive_start =0;           //定义串口接收的标志位变量
 uint16_t receive_count =0;           //定义串口接收字节计数
@@ -69,6 +75,98 @@ void esp8266_init(void)
      Timerout_exit(5,"7.MQTT ALIYUN");
      Serial_SendString(AT_MQTTSUB);
      Timerout_exit(5,"8.SUB TOPIC");
+     
+     Delay_ms(1000);
+     OLED_Clear();
+     OLED_ShowString(2, 1, "ESP8266_INIT");
+     Delay_ms(2000);
+     OLED_Clear();
+}
+
+void esp8266_send_data(void)
+{
+     char send_databuf[256];
+     sprintf((char *)send_databuf,"AT+MQTTPUB=0,\""PUB_TOPIC"\",\""JSON_FORMAT"\",0,0\r\n",temp_value,humi_value);
+     Serial_SendString(send_databuf);
+     Timerout_exit(3,"SEED SUCCESS");
+     Delay_ms(2000);
+     OLED_Clear();
+}
+
+void esp8266_receive_data(void)
+{    
+     uint8_t retval =0;
+     int data_len =0;
+     uint8_t data_body[128] ={0};
+     
+     if(receive_start == 1)
+     {
+          Delay_ms(50);
+		if(strstr((const char*)receive_buf,"+MQTTSUBRECV:"))
+		{
+			sscanf((const char *)receive_buf,"+MQTTSUBRECV:0,\""SUB_TOPIC"\",%d,%s",&data_len,data_body);
+               if(strlen((const char*)data_body)== data_len)
+			{
+                    retval = parse_json_msg(data_body,data_len);
+                    if(retval ==2)
+                    {    
+                         OLED_ShowString(2,1,"JSON_ERROR");
+                    }
+                    memset(receive_buf, 0x00, sizeof(receive_buf));
+                    receive_count =0;
+                    receive_start =0;
+			}
+               
+          }
+     }
+     
+}
+uint8_t parse_json_msg(uint8_t *json_msg, uint8_t json_len)
+{
+    uint8_t retval = 0;
+    JSONStatus_t result;
+    char *value;
+    size_t valueLength;
+
+    result = JSON_Validate((const char *)json_msg, json_len);    // 验证 JSON 消息是否有效
+    if (result != JSONSuccess)
+    {
+        return 1; // JSON 验证失败
+    }
+
+    const char *data[3] = {"params.led", "params.temp", "params.humi"}; // 定义要查找的键数组
+    for (int i = 0; i < 3; ++i)
+    {
+        result = JSON_Search((char *)json_msg, json_len, data[i], strlen(data[i]), &value, &valueLength);
+        if (result == JSONSuccess)
+        {
+            char save = value[valueLength];          // 处理找到的值
+            value[valueLength] = '\0';
+            switch (i)
+            {
+                case 0: // "params.led"
+                    led_status = atoi(value);
+                    OLED_ShowNum(1, 8, led_status, 2);
+                    break;
+                case 1: // "params.temp"
+                    temp_value = atof(value);
+                    OLED_ShowNum(2, 8, temp_value, 2);
+                    break;
+                case 2: // "params.hum"
+                    humi_value = atof(value);
+                    OLED_ShowNum(3, 8, humi_value, 2);
+                    break;
+            }
+            value[valueLength] = save;
+        }
+        else
+        {
+            retval = 2; // 查询键失败
+            break;      // 如果任何键未找到，退出循环
+        }
+    }
+
+    return retval; // 返回解析结果
 }
 
 void Timerout_exit(uint16_t time,char *message)
@@ -92,7 +190,7 @@ void Timerout_exit(uint16_t time,char *message)
                    receive_count =0;
                    receive_start =0;
                    break;
-          }         
+          }
      }
 
 }

@@ -17,11 +17,10 @@ int main(void)
      USART1_Init();
      esp8266_init();
      
-     /*显示静态字符串*/
-	OLED_ShowString(1, 1, "RxData:");
+     esp8266_send_data();
 	while(1)
 	{
-          
+          esp8266_receive_data();
 //          if (Serial_GetRxFlag() == 1)			//检查串口接收数据的标志位
 //		{
 //			RxData = Serial_GetRxData();		//获取串口接收的数据
