@@ -379,7 +379,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (..\HARDWARE\Key.h)(0x64C0873D)
 F (..\HARDWARE\Key.h)(0x64C0873D)()
-F (..\HARDWARE\Menu.c)(0x66191ED3)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\USER -I ..\SYSTEM -I ..\HARDWARE -I ..\HARDWARE\LED -I ..\HARDWARE\u8g2-I.\RTE\_Target_1-ID:\rujian\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_STDPERIPH_DRIVER-o ..\obj\menu.o --omf_browse ..\obj\menu.crf --depend ..\obj\menu.d)
+F (..\HARDWARE\Menu.c)(0x66193440)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ..\CORE -I ..\STM32F10x_FWLib\inc -I ..\USER -I ..\SYSTEM -I ..\HARDWARE -I ..\HARDWARE\LED -I ..\HARDWARE\u8g2-I.\RTE\_Target_1-ID:\rujian\keil5\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_STDPERIPH_DRIVER-o ..\obj\menu.o --omf_browse ..\obj\menu.crf --depend ..\obj\menu.d)
 I (..\HARDWARE\Menu.h)(0x64DA3F1E)
 I (..\USER\stm32f10x.h)(0x5BC97917)
 I (..\CORE\core_cm3.h)(0x4D523B58)
