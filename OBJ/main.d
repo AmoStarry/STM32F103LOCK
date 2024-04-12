@@ -35,3 +35,14 @@
 ..\obj\main.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\main.o: ..\SYSTEM\Delay.h
 ..\obj\main.o: ..\HARDWARE\OLED.h
+..\obj\main.o: ..\HARDWARE\FPM383C.h
+..\obj\main.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\main.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\String.h
+..\obj\main.o: ..\HARDWARE\keyboard.h
+..\obj\main.o: ..\HARDWARE\u8g2\u8g2.h
+..\obj\main.o: ..\HARDWARE\u8g2\u8x8.h
+..\obj\main.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stdarg.h
+..\obj\main.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\stddef.h
+..\obj\main.o: D:\rujian\keil5\ARM\ARMCC\Bin\..\include\limits.h
+..\obj\main.o: ..\HARDWARE\Key.h
+..\obj\main.o: ..\HARDWARE\Menu.h

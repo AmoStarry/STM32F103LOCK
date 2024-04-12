@@ -5,8 +5,24 @@
 #include <Serial.h>
 #include <Delay.h>
 #include "OLED.h"
+#include "FPM383C.h"
+#include "keyboard.h"
 
-uint8_t RxData;			//定义用于接收串口数据的变量
+#include "u8g2.h"
+#include "Key.h"
+#include "Menu.h"
+
+uint8_t u8g2_gpio_and_delay_stm32(U8X8_UNUSED u8x8_t *u8x8, U8X8_UNUSED uint8_t msg, U8X8_UNUSED uint8_t arg_int, U8X8_UNUSED void *arg_ptr);
+u8g2_t u8g2;
+
+void u8g2_Config()
+{
+	u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_hw_i2c,u8g2_gpio_and_delay_stm32);//U8G2_R0代表屏幕方向
+	u8g2_InitDisplay(&u8g2); // send init sequence to the display, display is in sleep mode after this,
+	u8g2_SetPowerSave(&u8g2, 0); // wake up display
+	u8g2_ClearBuffer(&u8g2);
+}
+
 
 int main(void)
 {
@@ -15,20 +31,19 @@ int main(void)
      LED_Init();
      OLED_Init();
      USART1_Init();
-     esp8266_init();
+//     esp8266_init();
+//     FPM383C_Init();	//指纹模块初始化函数     
+//     esp8266_send_data();
+     Key_Init();//按键初始化
+	I2C_Config();//I2C所用GPIO口初始化
+	u8g2_Config();//u8g2库初始化
+     Show_Menu_Config(); //菜单初始化
      
-     esp8266_send_data();
 	while(1)
 	{
-          esp8266_receive_data();
-//          if (Serial_GetRxFlag() == 1)			//检查串口接收数据的标志位
-//		{
-//			RxData = Serial_GetRxData();		//获取串口接收的数据
-//			Serial_SendByte(RxData);			//串口将收到的数据回传回去，用于测试
-//			OLED_ShowHexNum(1, 8, RxData, 2);	//显示串口接收的数据
-//		}
-//    printf("AT+MQTTPUB=0,\"/sys/k0ygtxfPbcQ/esp8266/thing/event/property/post\",\"{\\\"params\\\":{\\\"temp\\\":88\\,\\\"humi\\\":88\\,\\\"led\\\":1}\\,\\\"version\\\":\\\"1.0.0\\\"}\",1,0\r\n");
-//     Delay_ms(5000);
+           Show_Menu(fast_speed);  //菜单混动函数，修改"fast_speed"可以更改移滚动速度
+//          FPM383C_Loop();
+//          esp8266_receive_data();
 	}
 }
 
