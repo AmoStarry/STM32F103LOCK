@@ -20,13 +20,12 @@ typedef enum {
 
 
 void ui_run(char* a ,char* a_trg,int b);
-void ui_right_one_Picture(int16_t* a, int b);
-void ui_left_one_Picture(int16_t* a, int b );
+void animateDisplay(int8_t direction, int8_t maxDisplay);
 void Show_Menu(Speed_ENUM Speed_choose);
-void Game_Menu(void);
+void setup_Menu(void);
 void Show_Menu_Config(void);
-
-void To_Game_Menu_Display(void);
-void Game_To_Menu_Display(void);
+void Input_passwrod(void);
+void Modify_password(void);
+void PWRecv_password(void);
 
 #endif

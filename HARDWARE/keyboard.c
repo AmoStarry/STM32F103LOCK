@@ -1,5 +1,5 @@
 #include "keyboard.h"
-
+#include "Delay.h"
 void key_board_init(void)
 {
 //	GPIO_InitTypeDef  GPIO_InitStructure;
@@ -57,52 +57,14 @@ void key_board_init(void)
 
 char get_key_board(void)
 {
-//    //PD6 PD7 PC6 PC8      
-//    PDout(6) = 0;
-//    PDout(7) = 1;
-//    PCout(6) = 1;
-//    PCout(8) = 1;
-//    Delay_ms(2);
-//	
-//    //PC11 PE5 PA6 PG9
-//    if( PCin(11) == 0 ) return '1';
-//    else if( PEin(5) == 0 ) return '2';
-//    else if( PAin(6) == 0 ) return '3';
-//    else if( PGin(9) == 0 ) return 'A';
-//    
-//    PDout(6) = 1;
-//    PDout(7) = 0; 
-//    PCout(6) = 1; 
-//    PCout(8) = 1;
-//    Delay_ms(2);
-
-//    //PC11 PE5 PA6 PG9
-//    if( PCin(11) == 0 ) return '4'; 
-//    else if( PEin(5) == 0 ) return '5';
-//    else if( PAin(6) == 0 ) return '6'; 
-//    else if( PGin(9) == 0 ) return 'B';
-//    
-//    PDout(6) = 1;
-//    PDout(7) = 1; 
-//    PCout(6) = 0; 
-//    PCout(8) = 1;
-//    Delay_ms(2);
-//    //PC11 PE5 PA6 PG9
-//    if( PCin(11) == 0 ) return '7'; 
-//    else if( PEin(5) == 0 ) return '8'; 
-//    else if( PAin(6) == 0 ) return '9'; 
-//    else if( PGin(9) == 0 ) return 'C';
-//    
-//    PDout(6) = 1;
-//    PDout(7) = 1; 
-//    PCout(6) = 1; 
-//    PCout(8) = 0;
-//    Delay_ms(2);
-//    //PC11 PE5 PA6 PG9
-//    if( PCin(11) == 0 ) return '*'; 
-//    else if( PEin(5) == 0 ) return '0'; 
-//    else if( PAin(6) == 0 ) return '#'; 
-//    else if( PGin(9) == 0 ) return 'D';
-//    
-//    return 'N';
+     uint8_t KeyNum =0;
+	if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8) == 1)//按键按下
+	{
+		Delay_ms(20);
+		while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8) == 1)
+		Delay_ms(20);
+		KeyNum = '1';
+	}
+	return KeyNum;
 }
+
