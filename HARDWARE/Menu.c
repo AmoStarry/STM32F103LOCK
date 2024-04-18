@@ -61,71 +61,32 @@ void animateDisplay(int8_t direction, int8_t maxDisplay)
 
 void Show_Menu(Speed_ENUM Speed_choose) // 显示菜单函数，参数为动态显示的速度等级
 {   
-     static uint8_t left = 0;
-     static uint8_t right = 1;
     while (1) 
     {
         key = Key_GetNum(); // 获取按键值
-       // Delay_ms(800);
-//         if(index_cmp == 2)
-//          index_cmp = 1;
-//        if (key == 1) // 左按键，根据按键值更新选项
-//        {   
-//            if (index_cmp == 0) {
-//                index_cmp = 1;
-//                animateDisplay(-1, 32); // 当 index_cmp 为 0 时执行动画函数
-//            } 
-//            else {
-//                index_cmp = index_cmp - 1;
-//                animateDisplay(1, 32);  // 当 index_cmp 不为 0 时执行动画函数
-//            }
-//        } 
-//        else if (key == 2) 
-//        {
-//            if (index_cmp == 2) {
-//                index_cmp = 0;
-//                animateDisplay(1, 32); // 当 index_cmp 不为 0 时执行动画函数
-//            } 
-//            else {
-//                index_cmp = index_cmp + 1; // 更新索引
-//                animateDisplay(-1, 32); // 当 index_cmp 为 0 时执行动画函数
-//            }
-//        }
-
         if (key == 1) // 左按键，根据按键值更新选项
         {   
-          if(right == 2)
-             left = 1;
-          else
-          {
-               if(left == 1)
-                   left = 0;
-               else if(left == 0)
-                    left = 1;
-          }
-          
-          index_cmp = left;
-
+            if (index_cmp == 0) {
+                index_cmp = 1;
+                animateDisplay(-1, 32); // 当 index_cmp 为 0 时执行动画函数
+            } 
+            else {
+                index_cmp = index_cmp - 1;
+                animateDisplay(1, 32);  // 当 index_cmp 不为 0 时执行动画函数
+            }
         } 
         else if (key == 2) 
         {
-          if(left == 0)
-               right = 1;
-          else
-          {
-               if(right == 2)
-                    right = 1;
-               else if(right == 1)
-                    right = 2;
-          }
-          
-          index_cmp = right;
+            if (index_cmp == 2) {
+                index_cmp = 0;
+                animateDisplay(1, 32); // 当 index_cmp 不为 0 时执行动画函数
+            } 
+            else {
+                index_cmp = index_cmp + 1; // 更新索引
+                animateDisplay(-1, 32); // 当 index_cmp 为 0 时执行动画函数
+            }
         }
-        
-        
-        
-        
-        
+
         else if (key == 3)
         {
             Input_passwrod();
@@ -137,7 +98,7 @@ void Show_Menu(Speed_ENUM Speed_choose) // 显示菜单函数，参数为动态�
                 u8g2_ClearBuffer(&u8g2); // 清除显示缓冲区
                 u8g2_DrawXBM(&u8g2, 32, 0, 64, 64, password_big); // 传输密码大图标
                 u8g2_SendBuffer(&u8g2); // 将显示的信息写入显示缓冲区
-//                Modify_password();
+                Modify_password();
                 break;
             case 1:
                 u8g2_DrawUTF8(&u8g2, 25, 22, "%");
@@ -153,8 +114,8 @@ void Show_Menu(Speed_ENUM Speed_choose) // 显示菜单函数，参数为动态�
                 Delay_ms(10); // 延时10ms
                 break;
             case 2:
-               u8g2_ClearBuffer(&u8g2); // 清除显示缓冲区
-                u8g2_DrawXBM(&u8g2, 32, 0, 32, 32, fail); // 传输设置图标
+                u8g2_ClearBuffer(&u8g2); // 清除显示缓冲区
+                u8g2_DrawXBM(&u8g2, 32, 0, 64, 64, setup); // 传输设置图标
                 u8g2_SendBuffer(&u8g2);
                 setup_Menu();
                 break;
@@ -165,8 +126,7 @@ void Show_Menu(Speed_ENUM Speed_choose) // 显示菜单函数，参数为动态�
 
 
 void setup_Menu(void) 
-{
-    uint8_t  key2;     
+{   
     static char Box_x = 1;  // 设置小方框的初始位置
     static char Box_y = 14;
     static char Box_w = 84;
@@ -179,59 +139,61 @@ void setup_Menu(void)
     
 
     static int8_t Box_Flag = 0;
-    key2 = Key_GetNum(); // 获取按键值
-//    if(key == 3)        // 确认键
-//    {
-//        while(1)
-//        {   
-//            key = Key_GetNum(); 
-//            u8g2_ClearBuffer(&u8g2);
-//            u8g2_DrawUTF8(&u8g2,3,15,"添加指纹");
-//            u8g2_DrawUTF8(&u8g2,3,30,"删除指纹");
-//            u8g2_DrawUTF8(&u8g2,3,45,"删除全部指纹");
-//            u8g2_DrawXBM(&u8g2,3,52,16,16,quit);
+    key = Key_GetNum(); // 获取按键值
+    if(key == 3)        // 确认键
+    {
+        while(1)
+        {   
+            key = Key_GetNum(); 
+            u8g2_ClearBuffer(&u8g2);
+            u8g2_DrawUTF8(&u8g2,3,15,"添加指纹");
+            u8g2_DrawUTF8(&u8g2,3,30,"删除指纹");
+            u8g2_DrawUTF8(&u8g2,3,45,"删除全部指纹");
+            u8g2_DrawXBM(&u8g2,3,52,16,16,quit);
 
-//            ui_run(&Box_x, &Box_x_trg,1);   // 更新UI元素位置            
-//            ui_run(&Box_y, &Box_y_trg,1);
-//            ui_run(&Box_w, &Box_w_trg,2);
-//            ui_run(&Box_h, &Box_h_trg,1);
-//            
-//            u8g2_DrawFrame(&u8g2, Box_x, Box_y, Box_w, Box_h); // 绘制UI框架
-//            u8g2_SendBuffer(&u8g2);
-//            
-//            if (key == 1) 
-//            { 
-//                Box_Flag = (Box_Flag == 0) ? 3 : Box_Flag - 1; 
-//            }
-//            else if (key == 2) 
-//            {  
-//                Box_Flag = (Box_Flag == 3) ? 0 : Box_Flag + 1; 
-//            }           
-//            switch(Box_Flag) 
-//            {
-//                case 0: Box_x_trg = 1; Box_y_trg = 1; Box_w_trg =  sizeof("添加指纹")*6; Box_h_trg = 16; break;
-//                case 1: Box_x_trg = 1; Box_y_trg = 16; Box_w_trg = sizeof("删除指纹")*6; Box_h_trg = 16; break;
-//                case 2: Box_x_trg = 1; Box_y_trg = 31; Box_w_trg = sizeof("删除全部指纹")*6; Box_h_trg = 16; break;
-//                case 3: Box_x_trg = 1; Box_y_trg = 50; Box_w_trg = sizeof("输出")*6; Box_h_trg = 13;
-//                        key = Key_GetNum();
-//                        if(key == 3)
-//                        {
-//                            index_cmp = 1;  
-//                        }
-//                        break;
-//            } 
-//            if(index_cmp == 1)
-//            {
-//                u8g2_ClearBuffer(&u8g2);
-//                break; // 退出循环
-//            }               
-//        }               
-//    }
-//    else if(key == 1 || key == 2)
-//    {
-//        index_cmp = 1; // 返回到主界面
-//        animateDisplay(1, 32);
-//    }
+            ui_run(&Box_x, &Box_x_trg,1);   // 更新UI元素位置            
+            ui_run(&Box_y, &Box_y_trg,1);
+            ui_run(&Box_w, &Box_w_trg,2);
+            ui_run(&Box_h, &Box_h_trg,1);
+            
+            u8g2_DrawFrame(&u8g2, Box_x, Box_y, Box_w, Box_h); // 绘制UI框架
+            u8g2_SendBuffer(&u8g2);
+            
+            if (key == 1) 
+            { 
+                Box_Flag = (Box_Flag == 0) ? 3 : Box_Flag - 1; 
+            }
+            else if (key == 2) 
+            {  
+                Box_Flag = (Box_Flag == 3) ? 0 : Box_Flag + 1; 
+            }           
+            switch(Box_Flag) 
+            {
+                case 0: Box_x_trg = 1; Box_y_trg = 1; Box_w_trg =  sizeof("添加指纹")*6; Box_h_trg = 16;
+                        
+                        break;
+                case 1: Box_x_trg = 1; Box_y_trg = 16; Box_w_trg = sizeof("删除指纹")*6; Box_h_trg = 16; break;
+                case 2: Box_x_trg = 1; Box_y_trg = 31; Box_w_trg = sizeof("删除全部指纹")*6; Box_h_trg = 16; break;
+                case 3: Box_x_trg = 1; Box_y_trg = 50; Box_w_trg = sizeof("输出")*6; Box_h_trg = 13;
+                        key = Key_GetNum();
+                        if(key == 3)
+                        {
+                            index_cmp = 1;  
+                        }
+                        break;
+            } 
+            if(index_cmp == 1)
+            {
+                u8g2_ClearBuffer(&u8g2);
+                break; // 退出循环
+            }               
+        }               
+    }
+    else if(key == 1 || key == 2)
+    {
+        index_cmp = 1; // 返回到主界面
+        animateDisplay(1, 32);
+    }
     
 }
 
@@ -311,9 +273,11 @@ void Modify_password(void)
      key = Key_GetNum(); // 获取按键值
      if(key == 3)        // 确认键
      {
-          u8g2_ClearBuffer(&u8g2);             
-          u8g2_DrawUTF8(&u8g2,10,15,"验证密码");
-          u8g2_DrawFrame(&u8g2, 10, 30, 6 * 12 + 2, 14);
+          u8g2_ClearBuffer(&u8g2); 
+          u8g2_DrawUTF8(&u8g2,30,15,"输入密码");
+          u8g2_DrawFrame(&u8g2, 30, 30, 6 * 12 + 2, 17);
+          u8g2_SendBuffer(&u8g2);  
+          
           while(1)
           {
                pos = get_key_board();
@@ -343,8 +307,8 @@ void Modify_password(void)
                            u8g2_DrawUTF8(&u8g2,30,55,"验证成功");
                            u8g2_SendBuffer(&u8g2);
                            Delay_ms(1500);
-                           u8g2_ClearBuffer(&u8g2);
                            PWRecv_password();
+                           break;
                        }
                        else
                        {   
@@ -373,7 +337,7 @@ void Modify_password(void)
     else if(key == 1 || key == 2)
     {
         index_cmp = 1; // 返回到主界面
-        animateDisplay(1, 32);
+        animateDisplay(-1, 32);
     }
 }
 
@@ -387,6 +351,7 @@ void PWRecv_password(void)
           u8g2_ClearBuffer(&u8g2);             
           u8g2_DrawUTF8(&u8g2,30,15,"输入密码");
           u8g2_DrawFrame(&u8g2, 30, 30, 6 * 12 + 2, 17);
+          u8g2_DrawXBM(&u8g2,3,52,16,16,quit);
           u8g2_SendBuffer(&u8g2);       
           memset(PWRecv, 0 ,sizeof(PWRecv)); // 清除原来密码
           while (password_length < 6) 
@@ -401,10 +366,29 @@ void PWRecv_password(void)
              }
           }
           PWRecv[password_length] = '\0'; // 设置字符串结束符
-          confirm_num = Key_GetNum(); // 获取按键值
-          if(confirm_num == 3)        // 确认键
-          { 
-               u8g2_ClearBuffer(&u8g2);
+          if(pos == '#')
+          {
+               u8g2_SetDrawColor(&u8g2, 0); // 设置绘制颜色为黑色
+               u8g2_DrawBox(&u8g2, 30 +3 , 30 + 3, 6*12 , 12);
+               u8g2_SetDrawColor(&u8g2, 1); // 设置绘制颜色为黑色
+               memset(PWRecv, 0 ,sizeof(PWRecv)); // 清除原来密码
+               password_length = 0; // 重置密码长度
+          }
+          if(password_length == 6)
+          {
+               while(1)
+               {  
+                    confirm_num = Key_GetNum(); // 获取按键值                    
+                    if(confirm_num == 3)        // 确认键
+                    {
+                         u8g2_DrawFrame(&u8g2, 1, 50, 20, 13);
+                         u8g2_SendBuffer(&u8g2);
+                         Delay_ms(1500);
+                         u8g2_ClearBuffer(&u8g2);
+                         index_cmp =1;
+                         break;
+                    }
+               }
                break;
           }
      }

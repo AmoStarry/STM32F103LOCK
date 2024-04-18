@@ -61,6 +61,7 @@ uint8_t PS_SearchMBBuffer[17] = {0xEF,0x01,0xFF,0xFF,0xFF,0xFF,0x01,0x00,0x08,0x
 //删除指纹协议
 uint8_t PS_DeleteBuffer[16] = {0xEF,0x01,0xFF,0xFF,0xFF,0xFF,0x01,0x00,0x07,0x0C,'\0','\0',0x00,0x01,'\0','\0'}; //PageID: bit 10:11，SUM: bit 14:15
 
+uint8_t PS_ValidTempleteNumBuffer[12] = {0xEF,0x01,0xFF,0xFF,0xFF,0xFF,0x01,0x00,0x03,0x1D,0x00,0x21};
 	
 /**
 	* @brief	微秒级延时函数
@@ -527,6 +528,33 @@ void FPM383C_Init(void)
   * @param  None
   * @return None
   */
+
+void Finger_add(void)
+{
+     FPM383C_ControlLED(PS_BlueLEDBuffer,2000);
+     delay_ms(5);
+     FPM383C_Enroll(PageID,10000);		//注册指纹模式
+     delay_ms(500);
+     FPM383C_Sleep();
+     ScanStatus = 0;
+}
+
+/**
+  * @brief  获取有效指纹总数
+  * @param  None
+  * @return None
+  */
+void FPM383C_ValidTempleteNum(uint16_t *total)
+{
+     uint32_t Timeout =4000;
+     FPM383C_SendData(12,PS_ValidTempleteNumBuffer);
+     while(USART2_STA<12 && (--Timeout))
+	{
+		delay_ms(1);
+	}
+}
+
+
 void FPM383C_Loop(void)
 {
 //     FPM383C_ControlLED(PS_BlueLEDBuffer,2000);

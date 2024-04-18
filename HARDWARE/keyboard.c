@@ -1,70 +1,60 @@
 #include "keyboard.h"
 #include "Delay.h"
+
+
+
 void key_board_init(void)
 {
-//	GPIO_InitTypeDef  GPIO_InitStructure;
-//	
-//    //Ê¹ÄÜ¶Ë¿ÚAµÄÓ²¼şÊ±ÖÓ£¬¾ÍÊÇ¶Ô¶Ë¿ÚA¹©µç
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-//    
-//    //Ê¹ÄÜ¶Ë¿ÚCµÄÓ²¼şÊ±ÖÓ£¬¾ÍÊÇ¶Ô¶Ë¿ÚC¹©µç
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-//    
-//    //Ê¹ÄÜ¶Ë¿ÚDµÄÓ²¼şÊ±ÖÓ£¬¾ÍÊÇ¶Ô¶Ë¿ÚD¹©µç
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-//    
-//    //Ê¹ÄÜ¶Ë¿ÚEµÄÓ²¼şÊ±ÖÓ£¬¾ÍÊÇ¶Ô¶Ë¿ÚE¹©µç
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
-//    
-//    //Ê¹ÄÜ¶Ë¿ÚFµÄÓ²¼şÊ±ÖÓ£¬¾ÍÊÇ¶Ô¶Ë¿ÚF¹©µç
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);
-//	
-//	//Ê¹ÄÜ¶Ë¿ÚGµÄÓ²¼şÊ±ÖÓ£¬¾ÍÊÇ¶Ô¶Ë¿ÚG¹©µç
-//	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
-//    
-//    //PD6 PD7 PC6 PC8      //PC11 PE5 PA6 PG9
-//	//Ê¹ÓÃGPIO_InitÀ´ÅäÖÃÒı½Å
-//	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_OUT;        //Êä³öÄ£Ê½
-//	GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;       //ÍÆÍìÊä³öÄ£Ê½,Ä¬ÈÏµÄ
-//	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_6|GPIO_Pin_7; //Ö¸¶¨µÚ6 7¸ùÒı½Å
-//	GPIO_InitStructure.GPIO_Speed=GPIO_High_Speed;     //¸ßËÙ£¬µ«ÊÇ¹¦ºÄÊÇ×î¸ß
-//	GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_NOPULL;  //ÎŞĞèÉÏÏÂÀ­£¨Òà¿ÉÊ¹ÄÜÏÂÀ­µç×è£©
-//	GPIO_Init(GPIOD,&GPIO_InitStructure);              //D¿Ú
-//    
-//    GPIO_InitStructure.GPIO_Pin=GPIO_Pin_6|GPIO_Pin_8; //Ö¸¶¨µÚ6 8¸ùÒı½Å
-//    GPIO_Init(GPIOC,&GPIO_InitStructure);              //C¿Ú
-//    
-//    GPIO_InitStructure.GPIO_Pin=GPIO_Pin_8;            //Ö¸¶¨µÚ8¸ùÒı½Å
-//    GPIO_Init(GPIOF,&GPIO_InitStructure);              //F¿Ú
-//    
-//	/* ¾ØÕó¼üÅÌÊäÈëÄ£Ê½±ØĞëÊ¹ÄÜÄÚ²¿ÉÏÀ­µç×è£¬Òı½ÅĞü¿ÕµÄÊ±ºòÎª¹Ì¶¨µÄ¸ßµçÆ½ */
-//	GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP;	   //ÉÏÀ­
-//    GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN;         //ÊäÈëÄ£Ê½
-//    GPIO_InitStructure.GPIO_Pin=GPIO_Pin_6;            //Ö¸¶¨µÚ6¸ùÒı½Å
-//    GPIO_Init(GPIOA,&GPIO_InitStructure);              //A¿Ú
-//    
-//    GPIO_InitStructure.GPIO_Pin=GPIO_Pin_5;            //Ö¸¶¨µÚ5¸ùÒı½Å
-//    GPIO_Init(GPIOE,&GPIO_InitStructure);              //E¿Ú
-//    
-//    GPIO_InitStructure.GPIO_Pin=GPIO_Pin_9;            //Ö¸¶¨µÚ6¸ùÒı½Å
-//    GPIO_Init(GPIOG,&GPIO_InitStructure);              //G¿Ú
-//    
-//    GPIO_InitStructure.GPIO_Pin=GPIO_Pin_11;           //Ö¸¶¨µÚ11¸ùÒı½Å
-//    GPIO_Init(GPIOC,&GPIO_InitStructure);              //C¿Ú
-//    
-//    PFout(8)=0;
+    GPIO_InitTypeDef GPIO_InitStructure;
+    // ä½¿èƒ½GPIOBæ—¶é’Ÿ
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
+    // é…ç½®è¡Œä¸ºè¾“å‡º
+    GPIO_InitStructure.GPIO_Pin = KEYPAD_ROW_PIN0 | KEYPAD_ROW_PIN1 | KEYPAD_ROW_PIN2 |KEYPAD_ROW_PIN3;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(KEYPAD_ROW_GPIO, &GPIO_InitStructure);
+
+    // é…ç½®åˆ—ä¸ºè¾“å…¥
+    GPIO_InitStructure.GPIO_Pin = KEYPAD_COL_PIN0 | KEYPAD_COL_PIN1 | KEYPAD_COL_PIN2;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; // ä¸Šæ‹‰è¾“å…¥
+    GPIO_Init(KEYPAD_COL_GPIO, &GPIO_InitStructure);
 }
 
 char get_key_board(void)
 {
-     uint8_t KeyNum =0;
-	if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8) == 1)//æŒ‰é”®æŒ‰ä¸‹
-	{
-		Delay_ms(20);
-		while(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8) == 1)
-		Delay_ms(20);
-		KeyNum = '1';
-	}
-	return KeyNum;
+     uint16_t row_pins[4] = {KEYPAD_ROW_PIN0, KEYPAD_ROW_PIN1, KEYPAD_ROW_PIN2, KEYPAD_ROW_PIN3};
+     uint16_t col_pins[3] = {KEYPAD_COL_PIN0, KEYPAD_COL_PIN1, KEYPAD_COL_PIN2};
+     char key_map[4][3] = {
+        {'1', '2', '3'},
+        {'4', '5', '6'},
+        {'7', '8', '9'},
+        {'*', '0', '#'}
+     };
+     char key = '\0';
+     
+     for (int row = 0; row < 4; ++row) 
+     {         
+          GPIO_ResetBits(KEYPAD_ROW_GPIO, row_pins[row]);                                   // è®¾ç½®å½“å‰è¡Œä¸ºä½ç”µå¹³ 
+          for (int col = 0; col < 3; ++col)                                                 // æ£€æŸ¥åˆ—æ˜¯å¦ä¸ºä½ç”µå¹³
+          {                  
+               if (GPIO_ReadInputDataBit(KEYPAD_COL_GPIO, col_pins[col]) == Bit_RESET) 
+               {
+                    Delay_ms(20);                                                           // åœ¨ç¡®è®¤æŒ‰é”®æŒ‰ä¸‹å‰è¿›è¡Œå»¶æ—¶æ¶ˆæŠ–
+                    if (GPIO_ReadInputDataBit(KEYPAD_COL_GPIO, col_pins[col]) == Bit_RESET) // å†æ¬¡æ£€æŸ¥ç¡®ä¿æŒ‰é”®ç¡®å®è¢«æŒ‰ä¸‹
+                    {                  
+                         key = key_map[row][col];                                           // ç­‰å¾…æŒ‰é”®é‡Šæ”¾ï¼ˆç®€å•çš„æ¶ˆæŠ–ï¼‰
+                         while (GPIO_ReadInputDataBit(KEYPAD_COL_GPIO, col_pins[col]) == Bit_RESET);
+                         Delay_ms(20);                                                      // åœ¨ç¡®è®¤æŒ‰é”®é‡Šæ”¾åè¿›è¡Œå»¶æ—¶æ¶ˆæŠ–
+                         break;
+                    }
+               }
+          }
+          GPIO_SetBits(KEYPAD_ROW_GPIO, row_pins[row]);                                       // è®¾ç½®å½“å‰è¡Œä¸ºé«˜ç”µå¹³ 
+          if (key != '\0'){
+            break;
+          }
+    }
+    return key;
 }
 
