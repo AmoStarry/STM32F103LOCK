@@ -1,60 +1,57 @@
 #include "keyboard.h"
 #include "Delay.h"
 
-
-
-void key_board_init(void)
+#define sdo(x)		GPIO_WriteBit(GPIOA, GPIO_Pin_5, (BitAction)(x))
+#define scl(x)		GPIO_WriteBit(GPIOA, GPIO_Pin_6, (BitAction)(x))
+#define re_sdo      GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_5)
+void Tttp229_Init(void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    // 使能GPIOB时钟
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
-    // 配置行为输出
-    GPIO_InitStructure.GPIO_Pin = KEYPAD_ROW_PIN0 | KEYPAD_ROW_PIN1 | KEYPAD_ROW_PIN2 |KEYPAD_ROW_PIN3;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_Init(KEYPAD_ROW_GPIO, &GPIO_InitStructure);
-
-    // 配置列为输入
-    GPIO_InitStructure.GPIO_Pin = KEYPAD_COL_PIN0 | KEYPAD_COL_PIN1 | KEYPAD_COL_PIN2;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; // 上拉输入
-    GPIO_Init(KEYPAD_COL_GPIO, &GPIO_InitStructure);
+	
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;//设置为下拉输入
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5|GPIO_Pin_6;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	
+	
 }
 
-char get_key_board(void)
+uint8_t Key_board(void)
 {
-     uint16_t row_pins[4] = {KEYPAD_ROW_PIN0, KEYPAD_ROW_PIN1, KEYPAD_ROW_PIN2, KEYPAD_ROW_PIN3};
-     uint16_t col_pins[3] = {KEYPAD_COL_PIN0, KEYPAD_COL_PIN1, KEYPAD_COL_PIN2};
-     char key_map[4][3] = {
-        {'1', '2', '3'},
-        {'4', '5', '6'},
-        {'7', '8', '9'},
-        {'*', '0', '#'}
-     };
-     char key = '\0';
+	unsigned char i;
+	unsigned int temp = 0;
+     uint8_t KEY;
+	sdo(0);
+	Delay_us(100);
+	sdo(1);
+	Delay_us(10);	
+	for(i=0;i<16;i++)
+	{
+	temp>>=1;
+		scl(0);
+		if( re_sdo != 0)
+			temp|=0x8000;
+		scl(1);
+	}
+     if(temp ==0x0001) {KEY ='1';}
+     else if(temp ==0x0002) {KEY ='2';}
+     else if(temp ==0x0004) {KEY ='3';}
+     else if(temp ==0x0008) {KEY ='4';}
+     else if(temp ==0x0010) {KEY ='5';}
+     else if(temp ==0x0020) {KEY ='6';}
+     else if(temp ==0x0040) {KEY ='7';}
+     else if(temp ==0x0080) {KEY ='8';}
+     else if(temp ==0x0100) {KEY ='9';}
+     else if(temp ==0x0200) {KEY ='0';}
+     else if(temp ==0x0400) {KEY ='*';}
+     else if(temp ==0x0800) {KEY ='#';}
+     else if(temp ==0x1000) {KEY ='A';}
+     else if(temp ==0x2000) {KEY ='B';}
+     else if(temp ==0x4000) {KEY ='C';}
      
-     for (int row = 0; row < 4; ++row) 
-     {         
-          GPIO_ResetBits(KEYPAD_ROW_GPIO, row_pins[row]);                                   // 设置当前行为低电平 
-          for (int col = 0; col < 3; ++col)                                                 // 检查列是否为低电平
-          {                  
-               if (GPIO_ReadInputDataBit(KEYPAD_COL_GPIO, col_pins[col]) == Bit_RESET) 
-               {
-                    Delay_ms(20);                                                           // 在确认按键按下前进行延时消抖
-                    if (GPIO_ReadInputDataBit(KEYPAD_COL_GPIO, col_pins[col]) == Bit_RESET) // 再次检查确保按键确实被按下
-                    {                  
-                         key = key_map[row][col];                                           // 等待按键释放（简单的消抖）
-                         while (GPIO_ReadInputDataBit(KEYPAD_COL_GPIO, col_pins[col]) == Bit_RESET);
-                         Delay_ms(20);                                                      // 在确认按键释放后进行延时消抖
-                         break;
-                    }
-               }
-          }
-          GPIO_SetBits(KEYPAD_ROW_GPIO, row_pins[row]);                                       // 设置当前行为高电平 
-          if (key != '\0'){
-            break;
-          }
-    }
-    return key;
+return KEY;
 }
+
 

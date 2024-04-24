@@ -12,6 +12,7 @@
 "..\obj\keyboard.o"
 "..\obj\key.o"
 "..\obj\menu.o"
+"..\obj\servo.o"
 "..\obj\core_cm3.o"
 "..\obj\startup_stm32f10x_md.o"
 "..\obj\misc.o"

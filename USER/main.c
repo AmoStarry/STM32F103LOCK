@@ -7,6 +7,7 @@
 #include "OLED.h"
 #include "FPM383C.h"
 #include "keyboard.h"
+#include "Servo.h"
 
 #include "u8g2.h"
 #include "Key.h"
@@ -14,7 +15,7 @@
 
 uint8_t u8g2_gpio_and_delay_stm32(U8X8_UNUSED u8x8_t *u8x8, U8X8_UNUSED uint8_t msg, U8X8_UNUSED uint8_t arg_int, U8X8_UNUSED void *arg_ptr);
 u8g2_t u8g2;
-
+float Angle;			//定义角度变量
 void u8g2_Config()
 {
 	u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_hw_i2c,u8g2_gpio_and_delay_stm32);//U8G2_R0代表屏幕方向
@@ -27,23 +28,25 @@ void u8g2_Config()
 int main(void)
 {
      NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-     Timer_Init(10000,7200);   
-     LED_Init();
-     OLED_Init();
-     USART1_Init();
+//     Timer_Init(10000,7200);   
+//     LED_Init();
+//     OLED_Init();
+//     USART1_Init();
 //     esp8266_init();
 //     FPM383C_Init();	//指纹模块初始化函数     
 //     esp8266_send_data();
-     Key_Init();//按键初始化
-	I2C_Config();//I2C所用GPIO口初始化
-	u8g2_Config();//u8g2库初始化
-     Show_Menu_Config(); //菜单初始化
-     
+//     Key_Init();//按键初始化
+//	I2C_Config();//I2C所用GPIO口初始化
+//	u8g2_Config();//u8g2库初始化
+//     Show_Menu_Config(); //菜单初始化
+     Servo_Init();
 	while(1)
 	{
-           Show_Menu(fast_speed);  //菜单混动函数，修改"fast_speed"可以更改移滚动速度
+//           Show_Menu(fast_speed);  //菜单混动函数，修改"fast_speed"可以更改移滚动速度
 //          FPM383C_Loop();
 //          esp8266_receive_data();
+
+          Servo_SetAngle(90);
 	}
 }
 

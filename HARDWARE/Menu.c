@@ -209,7 +209,7 @@ void Input_passwrod(void)
      u8g2_SendBuffer(&u8g2);     
      while(1)
      {
-          pos = get_key_board();
+          pos = Key_board();
           if(pos !=0)
           {
                if(password_length <= 6) // 防止数组越界
@@ -280,7 +280,7 @@ void Modify_password(void)
           
           while(1)
           {
-               pos = get_key_board();
+               pos = Key_board();
                if(pos !=0)
                {
                     if(password_length <= 6) // 防止数组越界
@@ -356,7 +356,7 @@ void PWRecv_password(void)
           memset(PWRecv, 0 ,sizeof(PWRecv)); // 清除原来密码
           while (password_length < 6) 
           {
-             pos = get_key_board(); // 获取按键值
+             pos = Key_board(); // 获取按键值
              if (pos != 0) {
                  PWRecv[password_length] = pos; // 将字符存入数组
                  char str[2] = {pos, '\0'}; // 创建一个临时字符串用于显示
