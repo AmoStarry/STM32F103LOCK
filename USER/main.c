@@ -27,7 +27,7 @@ void u8g2_Config()
 
 int main(void)
 {
-     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+       NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 //     Timer_Init(10000,7200);   
 //     LED_Init();
 //     OLED_Init();
@@ -35,28 +35,28 @@ int main(void)
 //     esp8266_init();
 //     FPM383C_Init();	//指纹模块初始化函数     
 //     esp8266_send_data();
-//     Key_Init();//按键初始化
-//	I2C_Config();//I2C所用GPIO口初始化
-//	u8g2_Config();//u8g2库初始化
-//     Show_Menu_Config(); //菜单初始化
-     Servo_Init();
+       Key_Init();//按键初始化
+	  I2C_Config();//I2C所用GPIO口初始化
+	  u8g2_Config();//u8g2库初始化
+       Show_Menu_Config(); //菜单初始化
+//     Servo_Init();
 	while(1)
 	{
-//           Show_Menu(fast_speed);  //菜单混动函数，修改"fast_speed"可以更改移滚动速度
+           Show_Menu(fast_speed);  //菜单混动函数，修改"fast_speed"可以更改移滚动速度
 //          FPM383C_Loop();
 //          esp8266_receive_data();
 
-          Servo_SetAngle(90);
+//          Servo_SetAngle(90);
 	}
 }
 
-void TIM1_UP_IRQHandler(void)
-{
-	if (TIM_GetITStatus(TIM1, TIM_IT_Update) == SET)  //判断是否是TIM1的更新事件触发的中断
-	{
-          
-		TIM_ClearITPendingBit(TIM1, TIM_IT_Update);  //清除TIM1更新事件的中断标志位      
-          LED0_Toggle();	 //每一秒进来翻转一下电平																									//否则中断将连续不断地触发，导致主程序卡死
-	}
-}
+//void TIM1_UP_IRQHandler(void)
+//{
+//	if (TIM_GetITStatus(TIM1, TIM_IT_Update) == SET)  //判断是否是TIM1的更新事件触发的中断
+//	{
+//          
+//		TIM_ClearITPendingBit(TIM1, TIM_IT_Update);  //清除TIM1更新事件的中断标志位      
+//          LED0_Toggle();	 //每一秒进来翻转一下电平																									//否则中断将连续不断地触发，导致主程序卡死
+//	}
+//}
 
